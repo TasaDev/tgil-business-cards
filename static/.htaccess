@@ -1,0 +1,12 @@
+# The card maker needs a sign-in; published cards (/name/) stay public.
+# app.php is tried first only where it exists (the site root); card folders
+# fall through to their own index.html, /team/ to its index.php.
+DirectoryIndex app.php index.php index.html
+
+RewriteEngine On
+RewriteRule ^(index|404)\.html$ /app.php [L]
+
+# Never serve the sign-in helpers or account file directly.
+<FilesMatch "^(auth|admin-config)\.php$">
+  Require all denied
+</FilesMatch>
